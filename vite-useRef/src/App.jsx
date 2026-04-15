@@ -91,38 +91,63 @@ transition duration-200 h-10 w-150 "
   );
 }
 function CatFriends() {
+  const listRef = useRef(null);
+  function scrollToView({ index }) {
+    const listNode = listRef.current;
+    const imgNode = listNode.querySelectorAll("li > img")[index];
+    imgNode.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
   return (
     <>
-      <p className="text-center">CatFriends</p>
+      <p className="text-center bg-pink-300">CatFriends</p>
       <nav>
         <button
           className="px-4 py-2 rounded-lg font-medium bg-blue-500 text-white 
 hover:bg-blue-600 active:scale-95"
+          onClick={() => scrollToView({ index: 0 })}
         >
           cat1
         </button>
         <button
           className="px-4 py-2 m-2 rounded-lg font-medium bg-blue-500 text-white 
 hover:bg-blue-600 active:scale-95"
+          onClick={() => scrollToView({ index: 1 })}
         >
           cat2
         </button>
         <button
           className="px-4 py-2 rounded-lg font-medium bg-blue-500 text-white 
 hover:bg-blue-600 active:scale-95"
+          onClick={() => scrollToView({ index: 2 })}
         >
           cat3
         </button>
       </nav>
-      <ul className="flex gap-10">
+      <ul className="flex gap-10 overflow-x-auto" ref={listRef}>
         <li>
-          <img src={cat1} alt="cat1" />
+          <img
+            src={cat1}
+            alt="cat1"
+            className="w-[400px] flex-shrink-0 h-[500px]"
+          />
         </li>
         <li>
-          <img src={cat2} alt="cat2" />
+          <img
+            src={cat2}
+            alt="cat2"
+            className="w-[500px] h-75 flex-shrink-0 "
+          />
         </li>
         <li>
-          <img src={cat3} alt="cat3" />
+          <img
+            src={cat3}
+            alt="cat3"
+            className="w-[700px] h-[700px] flex-shrink-0 "
+          />
         </li>
       </ul>
     </>
